@@ -1,0 +1,121 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>home</title>
+    <link rel="icon" href="res/2.png" >
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+        <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+    </head>
+    <body>
+        <header  >
+            <nav class="navbar navbar-light bg-light justify-content-between">
+              <a class="navbar-brand" >shopping</a>
+            
+            </nav>
+         
+        <h1 style="text-align: center;">Shopping Cart</h1>
+
+        <div  class="som">
+         <li class="shop"><img src="res/1.jpg"><a class="add-to-cart" href="#" data-name="montre 1" data-price="100">montre 1: 100dt </a></li>
+            <li class="shop" ><img src="res/1.jpg"><a class="add-to-cart" href="#" data-name="montre 2" data-price="200"> montre 2: 200dt</a></li>
+                <li class="shop" ><img src="res/2.jpg"><a class="add-to-cart" href="#" data-name="montre 3" data-price="300">montre 3: 300dt</a></li>
+                <li class="shop" ><img src="res/3.jpg"><a class="add-to-cart" href="#" data-name="montre 4" data-price="400">montre 4:400dt</a></li>
+                <li class="shop" > <img src="res/4.jpg"><a class="add-to-cart" href="#" data-name="montre 5" data-price="300">montre 5: 300dt</a></li>
+                <li class="shop" ><img src="res/5.jpg"> <a class="add-to-cart" href="#" data-name="montre 6" data-price="400">montre 6: 400dt</a></li>
+                <li class="shop" > <img src="res/6.jpg"><a class="add-to-cart" href="#" data-name="montre 7" data-price="300">montre 7: 300dt</a></li>
+                <li class="shop" ><img src="res/2.jpg"> <a class="add-to-cart" href="#" data-name="montre 8" data-price="400">montre 8: 400dt </a></li>
+            
+        </div>
+     
+        <button id="clear-cart"  class="w3-btn w3-block w3-teal" style="margin-top: 10px;">Clear Cart</button>
+   
+        <div style="margin-top:100px ; margin-left: 400px;margin-right: 400px; margin-bottom: 100px; background-color: rgba(127, 255, 212, 0.527); padding: 50px;"> 
+            <ul id="show-cart">
+                <li>???????</li>
+            </ul>
+            <div>vous avez choisis <span id="count-cart">X</span> element</div>
+            <div>le prix Toltal par dt  <span id="total-cart" ></span></div>
+        </div>
+    
+
+
+        <script src="js/script.js"></script>
+
+        <script>
+
+            $(".add-to-cart").click(function(event){
+                event.preventDefault();
+                var name = $(this).attr("data-name");
+                var price = Number($(this).attr("data-price"));
+
+                shoppingCart.addItemToCart(name, price, 1);
+                displayCart();
+            });
+
+            $("#clear-cart").click(function(event){
+                shoppingCart.clearCart();
+                displayCart();
+            });
+
+            function displayCart() {
+                var cartArray = shoppingCart.listCart();
+                console.log(cartArray);
+                var output = "";
+
+                for (var i in cartArray) {
+                    output += "<li >"
+                        +cartArray[i].name
+                        +" <input class='item-count' style='border: none;border-bottom: 2px solid red; background-color: rgba(127, 255, 212, 0.527); width= 50px'' type='number' data-name='"
+                        +cartArray[i].name
+                        +"' value='"+cartArray[i].count+"' >"
+                        +" <button class='plus-item , w3-button w3-circle w3-black'  data-name='"
+                        +cartArray[i].name+"'>+</button>"
+                        +" <button class='subtract-item , w3-button w3-circle w3-black' data-name='"
+                        +cartArray[i].name+"'>-</button>"
+                        +" <button class='delete-item , w3-button w3-circle w3-black' data-name='"
+                        +cartArray[i].name+"'>X</button>"
+                        +"</li>";
+                }
+
+                $("#show-cart").html(output);
+                $("#count-cart").html( shoppingCart.countCart() );
+                $("#total-cart").html( shoppingCart.totalCart() );
+            }
+
+            $("#show-cart").on("click", ".delete-item", function(event){
+                var name = $(this).attr("data-name");
+                shoppingCart.removeItemFromCartAll(name);
+                displayCart();
+            });
+
+            $("#show-cart").on("click", ".subtract-item", function(event){
+                var name = $(this).attr("data-name");
+                shoppingCart.removeItemFromCart(name);
+                displayCart();
+            });
+
+            $("#show-cart").on("click", ".plus-item", function(event){
+                var name = $(this).attr("data-name");
+                shoppingCart.addItemToCart(name, 0, 1);
+                displayCart();
+            });
+
+            $("#show-cart").on("change", ".item-count", function(event){
+                var name = $(this).attr("data-name");
+                var count = Number($(this).val());
+                shoppingCart.setCountForItem(name, count);
+                displayCart();
+            });
+
+
+            displayCart();
+
+        </script>
+    </body>
+</html>

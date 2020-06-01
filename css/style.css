@@ -1,0 +1,66 @@
+*{ 
+    padding: 0%;
+    margin: 0cm;
+    
+   
+}
+body{
+ background-image:url('../res/glow.jpg');
+ background-repeat: no-repeat;
+ background-size: cover;
+}
+
+.navbar {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: nowrap;
+    font-size: 50px;
+    background-image: linear-gradient(260deg, #2376ae77 0%, #c06ecf85 100%);
+    
+    
+}
+
+.som{
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-image: linear-gradient(260deg, #51e4a76b 0%, #c06ecf88 100%);
+    
+
+}
+
+    .shop{
+        display: flex;  
+        flex-direction: column;
+        justify-content: center;
+        justify-items: center;
+        
+    }
+    .shop a{
+        font-family: Georgia, serif;
+        letter-spacing: 2px;
+         word-spacing: 2px;
+        color: #000000;
+       font-weight: normal;
+       text-decoration: none;
+        font-style: normal;
+        font-variant: normal;
+        text-transform: none;
+        margin :20px
+    }
+    .shop img{
+        margin: 20px;
+        width: 300px;
+        height: 300px;
+    }
+    .cla{
+     display: flex;
+     justify-items: center;
+
+        width: 100;
+        border: solid ;
+    }
+   
